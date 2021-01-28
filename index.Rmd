@@ -79,6 +79,5 @@ c("Training set error" = pred1, "Validation set error" = pred2)
 
 ## Thank you!
 
---- .class #id
 
 

@@ -71,6 +71,5 @@ shinyServer(function(input, output) {
 
 ## Thank you!
 
---- .class #id
 
 
