@@ -69,8 +69,16 @@ shinyServer(function(input, output) {
 
 --- .class #id
 
-## Thank you!
+## Plot
 
 
+```r
+output$plot1 = renderPlot({
+        plot(data$Ozone, data$Temp, col=rgb(0.4,0.4,0.8,0.6), pch = 16, cex = 1.3, xlab = "Ozone", ylab = "Temp")
+        mdl2 = lm(Temp ~ poly(Ozone, input$deg), data = data) #Assume a user input of 2
+        iX = sort(data$Ozone, index.return = T)$ix
+        lines(x = data$Ozone[iX], y = predict(mdl2, newdata = list(Ozone = data$Ozone[iX])), col = 2, lwd = 2)
+    })
+```
 
-
+<img src="assets/fig/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" />

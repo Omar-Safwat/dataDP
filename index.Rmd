@@ -77,8 +77,20 @@ c("Training set error" = pred1, "Validation set error" = pred2)
 
 --- .class #id
 
-## Thank you!
+## Plot
 
+```{r eval=FALSE}
+output$plot1 = renderPlot({
+        plot(data$Ozone, data$Temp, col=rgb(0.4,0.4,0.8,0.6), pch = 16, cex = 1.3, xlab = "Ozone", ylab = "Temp")
+        mdl2 = lm(Temp ~ poly(Ozone, input$deg), data = data) #Assume a user input of 2
+        iX = sort(data$Ozone, index.return = T)$ix
+        lines(x = data$Ozone[iX], y = predict(mdl2, newdata = list(Ozone = data$Ozone[iX])), col = 2, lwd = 2)
+    })
+```
 
-
-
+```{r echo=FALSE, fig.width=5, fig.height=5, fig.align= "center"}
+plot(data$Ozone, data$Temp, col=rgb(0.4,0.4,0.8,0.6), pch = 16, cex = 1.3, xlab = "Ozone", ylab = "Temp")
+        mdl2 = lm(Temp ~ poly(Ozone, 2), data = data)
+        iX = sort(data$Ozone, index.return = T)$ix
+        lines(x = data$Ozone[iX], y = predict(mdl2, newdata = list(Ozone = data$Ozone[iX])), col = 2, lwd = 2)
+```

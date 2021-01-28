@@ -123,11 +123,20 @@ shinyServer(function(input, output) {
 <slide class="class" id="id" style="background:;">
   
   <hgroup>
-    <h2>Thank you!</h2>
+    <h2>Plot</h2>
   </hgroup>
   
   <article data-timings="">
-    
+    <pre><code class="r">output$plot1 = renderPlot({
+        plot(data$Ozone, data$Temp, col=rgb(0.4,0.4,0.8,0.6), pch = 16, cex = 1.3, xlab = &quot;Ozone&quot;, ylab = &quot;Temp&quot;)
+        mdl2 = lm(Temp ~ poly(Ozone, input$deg), data = data) #Assume a user input of 2
+        iX = sort(data$Ozone, index.return = T)$ix
+        lines(x = data$Ozone[iX], y = predict(mdl2, newdata = list(Ozone = data$Ozone[iX])), col = 2, lwd = 2)
+    })
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" /></p>
+
   </article>
   <!-- Presenter Notes -->
   
@@ -161,7 +170,7 @@ shinyServer(function(input, output) {
     
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Thank you!'>
+        data-slide=4 title='Plot'>
          4
       </a>
     </li>
